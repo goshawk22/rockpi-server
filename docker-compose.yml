@@ -119,7 +119,7 @@ services:
 
   myst:
     image: mysteriumnetwork/myst:latest
-    command: 'service --agreed-terms-and-conditions'
+    command: 'service --agreed-terms-and-conditions wireguard'
     dns:
       - 1.1.1.1
       - 1.0.0.1
