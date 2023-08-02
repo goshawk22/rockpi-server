@@ -120,7 +120,7 @@ services:
       - FIRMWARE_SHORT_HASH=5e6272d
 
   myst:
-    image: mysteriumnetwork/myst:latest
+    image: mysteriumnetwork/myst:1.24.0-alpine
     command: '--keystore.lightweight --userspace --ui.features=restart service --agreed-terms-and-conditions wireguard'
     dns:
       - 1.1.1.1
