@@ -4,12 +4,13 @@ on:
   schedule:
     - cron:  "0 0 * * *" # Run daily at midnight
   workflow_dispatch:
+  push:
 
 permissions: 
   contents: write
 
 env:
-  fleet: replace/with-your-fleet-slug
+  fleet: gh_goshawk22/rockpi-server
   
 jobs:
   build-prod:
@@ -22,11 +23,11 @@ jobs:
         run: |
           cd /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}
 
-          miner="$(echo ${{ github.event.repository.name }})"
-          echo "Repo: $miner"
-          echo "miner=$miner" >> $GITHUB_ENV
+          repo="$(echo ${{ github.event.repository.name }})"
+          echo "Repo: $repo"
+          echo "repo=$repo" >> $GITHUB_ENV
 
-          wget https://raw.githubusercontent.com/NebraLtd/"$miner"/master/docker-compose.yml -O docker-compose.yml.new
+          wget https://raw.githubusercontent.com/goshawk22/"$repo"/master/docker-compose.yml -O docker-compose.yml.new
 
           if cmp docker-compose.yml docker-compose.yml.new; then
             echo "We're already using the latest docker-compose.yml"

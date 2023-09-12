@@ -1,7 +1,7 @@
-name: nebra-helium-rockpi-indoor
+name: rockpi-server
 type: sw.application
 description: >-
-  Manage your Nebra Indoor ROCK Pi Helium Miner remotely using Nebra and balenaCloud.
+  RockPi Server with support for the helium network
 post-provisioning: >-
   ## Usage instructions
   
@@ -17,7 +17,7 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: "https://github.com/goshawk22/helium-nebra-indoor2"
+      url: "https://github.com/goshawk22/rockpi-server"
   logo:
     type: blob.asset
     data:
@@ -32,4 +32,4 @@ data:
   defaultDeviceType: rockpi-4b-rk3399
   supportedDeviceTypes:
     - rockpi-4b-rk3399
-version: 0.1.1
+version: 1.0.0

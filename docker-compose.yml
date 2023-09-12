@@ -119,26 +119,9 @@ services:
       - FIRMWARE_VERSION=v1.1.1
       - FIRMWARE_SHORT_HASH=ced1242
 
-  myst:
-    image: mysteriumnetwork/myst:1.25.5-alpine
-    command: '--keystore.lightweight --userspace --ui.features=restart service --agreed-terms-and-conditions wireguard'
-    dns:
-      - 1.1.1.1
-      - 1.0.0.1
-    privileged: true
-    restart: always
-    network_mode: host
-    volumes:
-      - "myst-data:/var/lib/mysterium-node"
-      - "myst-logs:/root/.mysterium"
-    labels:
-      io.balena.features.kernel-modules: '1'
-
 volumes:
   miner-storage:
   pktfwdr:
   dbus:
   nebra:
   watchdog-log:
-  myst-data:
-  myst-logs:
