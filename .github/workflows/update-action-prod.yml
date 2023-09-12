@@ -17,4 +17,4 @@ jobs:
           balena_token: ${{secrets.BALENA_TOKEN}}
           balena_cli_commands: >
             push gh_goshawk22/rockpi-server;
-          balena_cli_version: 13.7.1
+          balena_cli_version: 17.1.1
