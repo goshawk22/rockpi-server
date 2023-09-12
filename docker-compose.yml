@@ -119,9 +119,27 @@ services:
       - FIRMWARE_VERSION=v1.1.1
       - FIRMWARE_SHORT_HASH=ced1242
 
+  tailscale:
+    # where <arch> is one of aarch64, armv7hf or amd64
+    image: bh.cr/klutchell_blocks/tailscale-aarch64
+    network_mode: host
+    restart: on-failure
+    volumes:
+      - state:/var/lib/tailscale
+    labels:
+      - io.balena.features.kernel-modules=1
+    cap_add:
+      - net_admin
+      - net_raw
+      - sys_module
+    tmpfs:
+      - /tmp
+      - /var/run/
+
 volumes:
   miner-storage:
   pktfwdr:
   dbus:
   nebra:
   watchdog-log:
+  state:
