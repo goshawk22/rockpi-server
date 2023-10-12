@@ -121,7 +121,7 @@ services:
 
   tailscale:
     # where <arch> is one of aarch64, armv7hf or amd64
-    image: bh.cr/klutchell_blocks/tailscale-aarch64
+    image: bh.cr/klutchell_blocks/tailscale-aarch64/1.50.1
     network_mode: host
     restart: on-failure
     volumes:
@@ -135,6 +135,8 @@ services:
     tmpfs:
       - /tmp
       - /var/run/
+    environment:
+      - TS_EXTRA_ARGS="--advertise-exit-node"
 
 volumes:
   miner-storage:
