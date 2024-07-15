@@ -121,7 +121,7 @@ services:
 
   tailscale:
     # where <arch> is one of aarch64, armv7hf or amd64
-    image: bh.cr/gh_goshawk22/tailscale-aarch64/1.64.2
+    image: bh.cr/gh_goshawk22/tailscale-aarch64/1.68.1
     network_mode: host
     restart: on-failure
     volumes:
