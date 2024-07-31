@@ -32,4 +32,4 @@ data:
   defaultDeviceType: rockpi-4b-rk3399
   supportedDeviceTypes:
     - rockpi-4b-rk3399
-version: 1.5.1
+version: 1.6.0
