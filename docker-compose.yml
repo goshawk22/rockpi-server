@@ -142,7 +142,7 @@ services:
     ports:
       - 8073:8073
     devices:
-      - /dev/bus/usb/005/002:/dev/bus/usb/005/002
+      - /dev/bus/usb:/dev/bus/usb
     tmpfs:
       - /tmp/openwebrx
 
