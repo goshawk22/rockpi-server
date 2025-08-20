@@ -17,17 +17,6 @@ services:
       - /tmp
       - /var/run/
 
-  openwebrx:
-    image: jketterl/openwebrx:stable
-    volumes:
-      - openwebrx:/var/lib/openwebrx
-    ports:
-      - 8073:8073
-    devices:
-      - /dev/bus/usb:/dev/bus/usb
-    tmpfs:
-      - /tmp/openwebrx
-
   owrx:
     image: 'slechev/openwebrxplus-softmbe:latest'
     container_name: owrx-mbe
