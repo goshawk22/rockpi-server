@@ -28,7 +28,27 @@ services:
     tmpfs:
       - /tmp/openwebrx
 
+  owrx:
+    image: 'slechev/openwebrxplus-softmbe:latest'
+    container_name: owrx-mbe
+    restart: unless-stopped
+    ports:
+      - '8073:8073'
+    environment:
+      TZ: Europe/London
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    volumes:
+      - openwebrxetc:/etc/openwebrx
+      - openwebrxvar:/var/lib/openwebrx
+      - openwebrxplugins:/usr/lib/python3/dist-packages/htdocs/plugins
+    # mount /tmp in memory, for RPi devices, to avoid SD card wear and make dump1090 work faster
+    tmpfs:
+      - /tmp:mode=1777
+
 volumes:
   watchdog-log:
   ts-state: {}
-  openwebrx:
+  openwebrxetc:
+  openwebrxvar:
+  openwebrxplugins:
