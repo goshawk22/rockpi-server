@@ -1,0 +1,75 @@
+name: "CI & CodeQL"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-test:
+    name: "Build, Test & CodeQL"
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      packages: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: c-cpp
+          build-mode: manual
+
+    steps:
+    - name: "Checkout repository"
+      uses: actions/checkout@v4
+
+    - name: "CodeQL Init"
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+
+    - name: "Install dependencies and build"
+      run: |
+        sudo apt-get update
+        sudo apt-get -y --no-install-recommends install build-essential libfftw3-dev libusb-1.0-0-dev librtlsdr-dev libcurl4-gnutls-dev
+        make
+
+    - name: "CodeQL Analysis"
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
+
+    - name: "Unit-Test & Integration-Test"
+      run: |
+        make test
+
+  lint:
+    name: "Lint & Spell Check"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout repository"
+      uses: actions/checkout@v4
+
+    - name: "Install lint tools"
+      run: |
+        sudo apt-get update
+        sudo apt-get -y --no-install-recommends install cppcheck
+        pipx install cpplint
+        pipx install codespell
+
+    - name: "Cppcheck (C/C++ best-practice)"
+      run: |
+        cppcheck --std=c17 *.c wsprd/*.c tests/*.c
+
+    - name: "Cpplint (formatting & best-practice)"
+      run: |
+        cpplint --linelength=1000 --extensions=c --headers=h *.c *.h wsprd/*.c wsprd/*.h tests/*.c || true  # cpplint returns non-zero on style warnings
+
+    - name: "Codespell check"
+      run: |
+        codespell -L 'rcall' *.md *.c *.h wsprd/*.c wsprd/*.h tests/*.c tests/*.sh documentation/**/*.md .github/workflows/*.yml

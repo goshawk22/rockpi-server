@@ -17,27 +17,28 @@ services:
       - /tmp
       - /var/run/
 
-  owrx:
-    image: 'slechev/openwebrxplus-softmbe:latest'
-    container_name: owrx-mbe
+  wsprd:
+    build:
+      context: ./rtlsdr-wsprd
+    container_name: wsprd-hackrf
+    user: "0:0"
     restart: unless-stopped
-    ports:
-      - '8073:8073'
     environment:
       TZ: Europe/London
+      WSPR_BAND: 17m
+      WSPR_CALLSIGN: M7GAQ/RX
+      WSPR_LOCATOR: IO90wx
+      WSPR_GAIN: 32
+      WSPR_RF_AMP: 1
+      WSPR_IF_GAIN: 24
+      WSPR_BASEBAND_GAIN: 32
+      WSPR_PPM: 0
+      WSPR_DEVICE_INDEX: 0
     devices:
       - /dev/bus/usb:/dev/bus/usb
-    volumes:
-      - openwebrxetc:/etc/openwebrx
-      - openwebrxvar:/var/lib/openwebrx
-      - openwebrxplugins:/usr/lib/python3/dist-packages/htdocs/plugins
-    # mount /tmp in memory, for RPi devices, to avoid SD card wear and make dump1090 work faster
     tmpfs:
       - /tmp:mode=1777
 
 volumes:
   watchdog-log:
   ts-state: {}
-  openwebrxetc:
-  openwebrxvar:
-  openwebrxplugins:
