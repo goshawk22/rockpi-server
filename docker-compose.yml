@@ -29,9 +29,8 @@ services:
       WSPR_CALLSIGN: M7GAQ/RX
       WSPR_LOCATOR: IO90wx
       WSPR_GAIN: 32
-      WSPR_RF_AMP: 1
-      WSPR_IF_GAIN: 24
-      WSPR_BASEBAND_GAIN: 32
+      WSPR_RF_AMP: 0
+      WSPR_FREQ_SHIFT: 0
       WSPR_PPM: 0
       WSPR_DEVICE_INDEX: 0
     devices:
