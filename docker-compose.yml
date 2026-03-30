@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     environment:
       TZ: Europe/London
-      WSPR_BAND: 17m
+      WSPR_BAND: 20m
       WSPR_CALLSIGN: M7GAQ/RX
       WSPR_LOCATOR: IO90wx
       WSPR_GAIN: 32
